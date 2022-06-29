@@ -1,0 +1,51 @@
+{
+  "name": "graph-ql-basics",
+  "version": "1.0.0",
+  "description": "NodeJS GraphQL basics with Apolo Server",
+  "main": "index.ts",
+  "scripts": {
+    "start": "nodemon --watch",
+    "lint": "npm run lint-es && npm run lint-ts",
+    "lint-ts": "./node_modules/.bin/tsc --skipLibCheck --incremental --noEmit",
+    "lint-es": "./node_modules/.bin/eslint --fix --cache ./**/*.{js,ts,json} && prettier --write **/*.{js,ts,json} --loglevel warn",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/I-vasilich-I/graph-ql-basics.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "GraphQL",
+    "Apolo"
+  ],
+  "author": "Oleg Vaskevich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/I-vasilich-I/graph-ql-basics/issues"
+  },
+  "homepage": "https://github.com/I-vasilich-I/graph-ql-basics#readme",
+  "dependencies": {
+    "apollo-server": "^3.9.0",
+    "dotenv": "^16.0.1",
+    "graphql": "^16.5.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "eslint": "^8.18.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "nodemon": "^2.0.16",
+    "prettier": "^2.7.1",
+    "prettier-eslint": "^15.0.1",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4"
+  }
+}
