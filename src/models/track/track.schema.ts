@@ -11,9 +11,13 @@ const trackSchema = gql`
     genres: [Genre]
   }
 
+  type GetTracks {
+    items: [Track]
+  }
+
   type Query {
     track: Track
-    tracks: [Track]
+    tracks: GetTracks
   }
 `;
 

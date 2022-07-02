@@ -10,7 +10,7 @@ const userSchema = gql`
   }
 
   type Query {
-    user: User
+    user(id: ID!): User
   }
 `;
 

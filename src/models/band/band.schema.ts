@@ -10,9 +10,13 @@ const bandSchema = gql`
     genres: [Genre]
   }
 
+  type getBands {
+    items: [Band]
+  }
+
   type Query {
-    band: Band
-    bands: [Band]
+    band(id: ID!): Band
+    bands: getBands
   }
 `;
 

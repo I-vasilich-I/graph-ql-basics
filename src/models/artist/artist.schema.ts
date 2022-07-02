@@ -10,12 +10,16 @@ const artistSchema = gql`
     birthPlace: String
     country: String
     bands: [Band]
-    instruments: String
+    instruments: [String]
+  }
+
+  type GetArtists {
+    items: [Artist]
   }
 
   type Query {
-    artist: Artist
-    artists: [Artist]
+    artist(id: ID!): Artist
+    artists: GetArtists
   }
 `;
 

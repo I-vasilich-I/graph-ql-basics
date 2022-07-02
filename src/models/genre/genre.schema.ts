@@ -9,9 +9,13 @@ const genreSchema = gql`
     year: Int
   }
 
+  type GetGenres {
+    items: [Genre]
+  }
+
   type Query {
-    genre: Genre
-    genres: [Genre]
+    genre(id: ID!): Genre
+    genres: GetGenres
   }
 `;
 

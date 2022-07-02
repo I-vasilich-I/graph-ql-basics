@@ -10,8 +10,12 @@ const favoritesSchema = gql`
     tracks: [Track]
   }
 
+  type GetFavorites {
+    items: [Favorites]
+  }
+
   type Query {
-    favorites: Favorites
+    favorites: GetFavorites
   }
 `;
 

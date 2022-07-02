@@ -12,9 +12,29 @@ const albumSchema = gql`
     image: String
   }
 
+  type GetAlbums {
+    items: [Album]
+  }
+
+  input CreateAlbum {
+    name: String
+    released: Int
+  }
+
+  type DeleteAlbum {
+    acknowledged: Boolean
+    deletedCount: Int
+  }
+
   type Query {
-    album: Album
-    albums: [Album]
+    album(id: ID!): Album
+    albums: GetAlbums
+  }
+
+  type Mutation {
+    createAlbum(album: CreateAlbum): Album
+    deleteAlbum(id: ID!): DeleteAlbum
+    updateAlbum(album: CreateAlbum): Album
   }
 `;
 
