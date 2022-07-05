@@ -10,7 +10,22 @@ const bandResolver = {
       return res;
     },
   },
-  Mutation: {},
+  Mutation: {
+    async createBand(_parent: any, args: any, { dataSources }: any) {
+      const { genresIds, ...rest } = await dataSources.bandAPI.postOne(args);
+      const genres = await Promise.all(genresIds.map((genreId: any) => dataSources.genreAPI.getOne(genreId)));
+      return { genres, ...rest };
+    },
+    async updateBand(_parent: any, args: any, { dataSources }: any) {
+      const { genresIds, ...rest } = await dataSources.bandAPI.updateOne(args);
+      const genres = await Promise.all(genresIds.map((genreId: any) => dataSources.genreAPI.getOne(genreId)));
+      return { genres, ...rest };
+    },
+    async deleteBand(_parent: any, { id }: any, { dataSources }: any) {
+      const res = await dataSources.bandAPI.delete(id);
+      return res;
+    },
+  },
 };
 
 export default bandResolver;

@@ -6,6 +6,12 @@ const memberSchema = gql`
     instrument: String
     years: String
   }
+
+  input IMember {
+    artist: String
+    instrument: String
+    years: String
+  }
 `;
 
 export default memberSchema;

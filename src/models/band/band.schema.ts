@@ -18,6 +18,12 @@ const bandSchema = gql`
     band(id: ID!): Band
     bands: getBands
   }
+
+  type Mutation {
+    createBand(name: String!, origin: String, members: [IMember], website: String, genresIds: [ID!]): Band
+    updateBand(id: ID!, name: String, origin: String, members: [IMember], website: String, genresIds: [ID!]): Band
+    deleteBand(id: ID!): Delete
+  }
 `;
 
 export default bandSchema;
