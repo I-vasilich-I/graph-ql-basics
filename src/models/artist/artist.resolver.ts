@@ -10,7 +10,22 @@ const artistResolver = {
       return res;
     },
   },
-  Mutation: {},
+  Mutation: {
+    async createArtist(_parent: any, { artist }: any, { dataSources }: any) {
+      const { bandsIds, ...rest } = await dataSources.artistAPI.postOne(artist);
+      const bands = await Promise.all(bandsIds.map((bandId: any) => dataSources.bandAPI.getOne(bandId)));
+      return { bands, ...rest };
+    },
+    async updateArtist(_parent: any, { artist }: any, { dataSources }: any) {
+      const { bandsIds, ...rest } = await dataSources.artistAPI.updateOne(artist);
+      const bands = await Promise.all(bandsIds.map((bandId: any) => dataSources.bandAPI.getOne(bandId)));
+      return { bands, ...rest };
+    },
+    async deleteArtist(_parent: any, { id }: any, { dataSources }: any) {
+      const res = await dataSources.artistAPI.delete(id);
+      return res;
+    },
+  },
 };
 
 export default artistResolver;
