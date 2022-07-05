@@ -10,7 +10,11 @@ const userSchema = gql`
   }
 
   type Query {
-    user(id: ID!): User
+    user(id: ID!): User!
+    jwt(email: String!, password: String!): String!
+  }
+  type Mutation {
+    register(firstName: String!, lastName: String!, email: String!, password: String!): User!
   }
 `;
 

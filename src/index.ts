@@ -1,5 +1,6 @@
 import { ApolloServer } from "apollo-server";
-import BaseApi from "./api/api";
+import BaseAPI from "./api/baseAPI";
+import UserAPI from "./api/userAPI";
 import { API_URLS } from "./constants";
 import resolvers from "./models/resolvers";
 import schemas from "./models/schemas";
@@ -10,14 +11,18 @@ const server = new ApolloServer({
   cache: "bounded",
   resolvers,
   dataSources: () => ({
-    albumAPI: new BaseApi(API_URLS.ALBUM_API),
-    artistAPI: new BaseApi(API_URLS.ARTIST_API),
-    genreAPI: new BaseApi(API_URLS.GENRE_API),
-    bandAPI: new BaseApi(API_URLS.BAND_API),
-    userAPI: new BaseApi(API_URLS.USER_API),
-    trackAPI: new BaseApi(API_URLS.TRACK_API),
-    favoritesAPI: new BaseApi(API_URLS.FAVORITES_API),
+    albumAPI: new BaseAPI(API_URLS.ALBUM_API),
+    artistAPI: new BaseAPI(API_URLS.ARTIST_API),
+    genreAPI: new BaseAPI(API_URLS.GENRE_API),
+    bandAPI: new BaseAPI(API_URLS.BAND_API),
+    userAPI: new UserAPI(API_URLS.USER_API),
+    trackAPI: new BaseAPI(API_URLS.TRACK_API),
+    favoritesAPI: new BaseAPI(API_URLS.FAVORITES_API),
   }),
+  context: ({ req }) => {
+    const token = req.headers.authorization || "";
+    return { token };
+  },
 });
 
 server.listen().then(({ url }) => {
