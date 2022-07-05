@@ -17,8 +17,22 @@ const albumSchema = gql`
   }
 
   input CreateAlbum {
+    name: String!
+    released: Int
+    artistsIds: [ID]
+    bandsIds: [ID]
+    trackIds: [ID]
+    genresIds: [ID]
+  }
+
+  input UpdateAlbum {
+    id: ID!
     name: String
     released: Int
+    artistsIds: [ID]
+    bandsIds: [ID]
+    trackIds: [ID]
+    genresIds: [ID]
   }
 
   type DeleteAlbum {
@@ -33,8 +47,8 @@ const albumSchema = gql`
 
   type Mutation {
     createAlbum(album: CreateAlbum): Album
+    updateAlbum(album: UpdateAlbum): Album
     deleteAlbum(id: ID!): DeleteAlbum
-    updateAlbum(album: CreateAlbum): Album
   }
 `;
 
