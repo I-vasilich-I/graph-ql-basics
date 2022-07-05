@@ -23,20 +23,26 @@ class BaseApi extends RESTDataSource {
   // GET
   async getAll() {
     const res = await this.get("/");
-    return { id: res._id, ...res };
+    return {
+      ...res,
+      items: res.items.map((el: any) => {
+        const newEl = el;
+        newEl.id = el._id;
+        return newEl;
+      }),
+    };
   }
 
   // POST
   async postOne(data: any) {
-    const res = await this.post("/", data);
-    return { id: res._id, ...res };
+    const { _id, ...rest } = await this.post("/", data);
+    return { id: _id, ...rest };
   }
 
   // PUT
-  async updateOne(data: any) {
-    const res = await this.put(`/${encodeURIComponent(data.id)}`, data);
-
-    return { id: res._id, ...res };
+  async updateOne({ id, ...rest }: any) {
+    const { _id, ...res } = await this.put(`/${encodeURIComponent(id)}`, { _id: id, ...rest });
+    return { id: _id, ...res };
   }
 
   // DELETE

@@ -10,7 +10,20 @@ const genreResolver = {
       return res;
     },
   },
-  Mutation: {},
+  Mutation: {
+    async createGenre(_parent: any, args: any, { dataSources }: any) {
+      const res = await dataSources.genreAPI.postOne(args);
+      return res;
+    },
+    async updateGenre(_parent: any, args: any, { dataSources }: any) {
+      const res = await dataSources.genreAPI.updateOne(args);
+      return res;
+    },
+    async deleteGenre(_parent: any, { id }: any, { dataSources }: any) {
+      const res = await dataSources.genreAPI.delete(id);
+      return res;
+    },
+  },
 };
 
 export default genreResolver;
