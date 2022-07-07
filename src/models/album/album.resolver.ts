@@ -1,36 +1,35 @@
-import getAlbumFields from "./album.service";
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import getAlbumData from "./album.service";
+
 const albumResolver = {
   Query: {
     async albums(_parent: any, _args: any, { dataSources }: any) {
       const { items } = await dataSources.albumAPI.getAll();
       const temp = await Promise.all(
         items.map(async (item: any) => {
-          const { bandsIds, genresIds, trackIds, artistsIds, ...rest } = item;
-          const fields = await getAlbumFields(dataSources, { bandsIds, genresIds, trackIds, artistsIds });
-          return { ...fields, ...rest };
+          const data = await getAlbumData(dataSources, item);
+          return data;
         })
       );
-      console.log(temp);
       return { items: temp };
     },
     async album(_parent: any, { id }: any, { dataSources }: any) {
       const res = await dataSources.albumAPI.getOne(id);
-      return res;
+      const data = await getAlbumData(dataSources, res);
+      return data;
     },
   },
 
   Mutation: {
     async createAlbum(_parent: any, { album }: any, { dataSources }: any) {
-      const { bandsIds, genresIds, trackIds, artistsIds, ...rest } = await dataSources.albumAPI.postOne(album);
-      const fields = await getAlbumFields(dataSources, { bandsIds, genresIds, trackIds, artistsIds });
-      return { ...fields, ...rest };
+      const res = await dataSources.albumAPI.postOne(album);
+      const data = await getAlbumData(dataSources, res);
+      return data;
     },
     async updateAlbum(_parent: any, { album }: any, { dataSources }: any) {
-      const { bandsIds, genresIds, trackIds, artistsIds, ...rest } = await dataSources.albumAPI.updateOne(album);
-      const fields = await getAlbumFields(dataSources, { bandsIds, genresIds, trackIds, artistsIds });
-      return { ...fields, ...rest };
+      const res = await dataSources.albumAPI.updateOne(album);
+      const data = await getAlbumData(dataSources, res);
+      return data;
     },
     async deleteAlbum(_parent: any, { id }: any, { dataSources }: any) {
       const res = await dataSources.albumAPI.deleteOne(id);
