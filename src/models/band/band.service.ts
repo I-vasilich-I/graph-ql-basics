@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const getBandData = async (dataSources: any, { genresIds, ...rest }: any) => {
-  const genres = await Promise.all(genresIds.map((genreId: any) => dataSources.genreAPI.getOne(genreId)));
+  const genres = genresIds
+    ? await Promise.all(genresIds.map((genreId: any) => dataSources.genreAPI.getOne(genreId)))
+    : [];
   return { genres, ...rest };
 };
 

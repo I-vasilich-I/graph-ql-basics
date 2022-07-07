@@ -38,7 +38,7 @@ const trackSchema = gql`
   }
 
   type Query {
-    track: Track
+    track(id: ID!): Track
     tracks: GetTracks
   }
 
