@@ -10,12 +10,14 @@ const favoritesSchema = gql`
     tracks: [Track]
   }
 
-  type GetFavorites {
-    items: [Favorites]
-  }
-
   type Query {
-    favorites: GetFavorites
+    favorites: Favorites
+  }
+  type Mutation {
+    addTrackToFavorites(id: ID!): Favorites
+    addBandToFavorites(id: ID!): Favorites
+    addArtistToFavorites(id: ID!): Favorites
+    addGenreToFavorites(id: ID!): Favorites
   }
 `;
 

@@ -1,5 +1,6 @@
 import { ApolloServer } from "apollo-server";
 import BaseAPI from "./api/baseAPI";
+import FavoritesAPI from "./api/favoritesAPI";
 import UserAPI from "./api/userAPI";
 import { API_URLS } from "./constants";
 import resolvers from "./models/resolvers";
@@ -17,7 +18,7 @@ const server = new ApolloServer({
     bandAPI: new BaseAPI(API_URLS.BAND_API),
     userAPI: new UserAPI(API_URLS.USER_API),
     trackAPI: new BaseAPI(API_URLS.TRACK_API),
-    favoritesAPI: new BaseAPI(API_URLS.FAVORITES_API),
+    favoritesAPI: new FavoritesAPI(API_URLS.FAVORITES_API),
   }),
   context: ({ req }) => {
     const token = req.headers.authorization || "";
