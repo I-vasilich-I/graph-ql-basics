@@ -14,9 +14,12 @@ class BaseApi extends RESTDataSource {
   }
 
   async getOne(id: string) {
-    const { _id, ...rest } = await this.get(
-      `/${encodeURIComponent(id)}` // path
-    );
+    const res = await this.get(`/${encodeURIComponent(id)}`);
+    if (!res) {
+      return null;
+    }
+
+    const { _id, ...rest } = res;
     return { id: _id, ...rest };
   }
 
