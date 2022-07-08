@@ -1,10 +1,15 @@
 import { ApolloServer } from "apollo-server";
+import dotenv from "dotenv";
 import BaseAPI from "./api/baseAPI";
 import FavoritesAPI from "./api/favoritesAPI";
 import UserAPI from "./api/userAPI";
 import { API_URLS } from "./constants";
 import resolvers from "./models/resolvers";
 import schemas from "./models/schemas";
+
+dotenv.config();
+
+const PORT = process.env.PORT || 4000;
 
 const server = new ApolloServer({
   typeDefs: schemas,
@@ -26,6 +31,6 @@ const server = new ApolloServer({
   },
 });
 
-server.listen().then(({ url }) => {
+server.listen(PORT).then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
 });
