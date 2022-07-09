@@ -4,8 +4,8 @@ import BaseAPI from "./api/baseAPI";
 import FavoritesAPI from "./api/favoritesAPI";
 import UserAPI from "./api/userAPI";
 import { API_URLS } from "./constants";
-import resolvers from "./models/resolvers";
-import schemas from "./models/schemas";
+import resolvers from "./modules/resolvers";
+import schemas from "./modules/schemas";
 
 dotenv.config();
 
